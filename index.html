@@ -5,10 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/blended_products/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home page</title>
-    <script type="module" crossorigin src="/blended_products/assets/styles-BK7AYJoX.js"></script>
-    <link rel="stylesheet" crossorigin href="/blended_products/assets/styles-CwHyMCDG.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/vineethtrv/css-loader@main/loader.css"
+    />
+    <script type="module" crossorigin src="/blended_products/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/blended_products/assets/vendor-Cbhu4xvy.js">
+    <link rel="modulepreload" crossorigin href="/blended_products/assets/handlers-D9KYNmik.js">
+    <link rel="stylesheet" crossorigin href="/blended_products/assets/handlers-BxPjGI4T.css">
+    <link rel="stylesheet" crossorigin href="/blended_products/assets/vendor-DnveWo0P.css">
   </head>
-  <body>
+  <body class="theme-light">
     <header class="header">
   <div class="container header__container">
     <a class="logo" href="./index.html" aria-label="Site logo">
@@ -47,7 +54,10 @@
           </a>
         </li>
         <li class="nav__item">
-          <a class="nav__link {=$highlight-wishlist}" href="./wishlist.html">
+          <a
+            class="nav__link {=$highlight-wishlist} wishlist"
+            href="./wishlist.html"
+          >
             Wishlist
             <span class="nav__count" data-wishlist-count>0</span>
             <!-- Динамічне число -->
@@ -55,6 +65,7 @@
         </li>
       </ul>
     </nav>
+    <button id="themeToggle" class="theme-toggle-button">Change Theme</button>
   </div>
 </header>
 
@@ -64,6 +75,9 @@
         <div class="container">
           <ul class="categories"></ul>
           <ul class="products"></ul>
+          <span class="loader"></span>
+          <button class="load-more" type="button">Load more</button>
+          <button class="go-to-top-of-list">To top of list</button>
           <div class="not-found">
             <div class="not-found__icon">
               <svg
@@ -90,9 +104,9 @@
         </div>
       </section>
     </main>
-    <div class="modal">
+    <div class="modal" data-modal>
   <div class="modal__content">
-    <button class="modal__close-btn" type="button"></button>
+    <button class="modal__close-btn" type="button" data-modal-close></button>
     <div class="modal-product"></div>
     <div class="modal-product__actions">
       <button
