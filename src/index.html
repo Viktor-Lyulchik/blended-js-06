@@ -5,9 +5,13 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/vineethtrv/css-loader@main/loader.css"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
-  <body>
+  <body class="theme-light">
     <load
       src="./partials/header.html"
       icon-path="img/sprite.svg#logo"
@@ -19,6 +23,9 @@
         <div class="container">
           <ul class="categories"></ul>
           <ul class="products"></ul>
+          <span class="loader"></span>
+          <button class="load-more" type="button">Load more</button>
+          <button class="go-to-top-of-list">To top of list</button>
           <div class="not-found">
             <div class="not-found__icon">
               <svg

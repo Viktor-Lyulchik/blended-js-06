@@ -36,7 +36,10 @@
           </a>
         </li>
         <li class="nav__item">
-          <a class="nav__link {=$highlight-wishlist}" href="./wishlist.html">
+          <a
+            class="nav__link {=$highlight-wishlist} wishlist"
+            href="./wishlist.html"
+          >
             Wishlist
             <span class="nav__count" data-wishlist-count>0</span>
             <!-- Динамічне число -->
@@ -44,5 +47,6 @@
         </li>
       </ul>
     </nav>
+    <button id="themeToggle" class="theme-toggle-button">Change Theme</button>
   </div>
 </header>
