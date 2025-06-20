@@ -4,11 +4,13 @@ import { refs } from './refs';
 
 //Функцію для створення, рендеру або видалення розмітки
 export function renderCategories(arrCat) {
-  refs.catList.innerHTML = arrCat.map(
-    cat => `<li class="categories__item">
-   <button class="categories__btn" type="button">${cat}</button>
- </li>`
-  );
+  refs.catList.innerHTML = arrCat
+    .map(
+      cat => `<li class="categories__item">
+              <button class="categories__btn" type="button">${cat}</button>
+            </li>`
+    )
+    .join('');
 }
 
 export function renderProducts(arrProd, append = false) {
@@ -23,12 +25,12 @@ export function renderProducts(arrProd, append = false) {
         description,
         images: [img = '/'],
       }) => `<li class="products__item" data-id="${id}">
-    <img class="products__image" src="${img}" alt="${description}"/>
-    <p class="products__title">${title}</p>
-    <p class="products__brand"><span class="products__brand--bold">Brand:</span>${brand}</p>
-    <p class="products__category">Category: ${category}</p>
-    <p class="products__price">Price: ${price}$</p>
- </li>`
+                <img class="products__image" src="${img}" alt="${description}"/>
+                <p class="products__title">${title}</p>
+                <p class="products__brand"><span class="products__brand--bold">Brand:</span>${brand}</p>
+                <p class="products__category">Category: ${category}</p>
+                <p class="products__price">Price: ${price}$</p>
+             </li>`
     )
     .join('');
   if (append) {

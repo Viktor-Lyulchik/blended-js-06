@@ -186,10 +186,10 @@ export function cartBuyBtnOnClick(event) {
 }
 
 export function changeThemeBtnOnClick() {
-  console.log(refs.body);
+  // console.log(refs.body);
 
   toggleTheme();
-  console.log(refs.body.classList);
+  // console.log(refs.body.classList);
 }
 
 export function toggleTheme() {
