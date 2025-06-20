@@ -1,2 +1,2 @@
-import{l as a,u as e,a as s,r as t,p as d,t as i,b as n,c,d as l}from"./assets/handlers-D9KYNmik.js";import"./assets/vendor-Cbhu4xvy.js";a();e();s();t.prodList.addEventListener("click",d);t.closeModalBtn.addEventListener("click",i);t.addToCartBtn.addEventListener("click",n);t.addToWishListBtn.addEventListener("click",c);t.changeThemeBtn.addEventListener("click",l);
+import{l as a,u as e,a as s,r as t,p as d,t as i,b as n,c,d as l}from"./assets/handlers-2Sstgb3J.js";import"./assets/vendor-Cbhu4xvy.js";a();e();s();t.prodList.addEventListener("click",d);t.closeModalBtn.addEventListener("click",i);t.addToCartBtn.addEventListener("click",n);t.addToWishListBtn.addEventListener("click",c);t.changeThemeBtn.addEventListener("click",l);
 //# sourceMappingURL=wishlist.js.map
