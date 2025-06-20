@@ -24,7 +24,7 @@ import { STORAGE_KEYS } from './constants';
 let selectedCategory;
 let query;
 export let currentProductid;
-let currentItemList;
+let currentListItem;
 
 export function catListOnClick(event) {
   if (!event.target.classList.contains('categories__btn')) {
@@ -71,9 +71,9 @@ export function prodListOnClick(event) {
   if (!event.target.parentElement.classList.contains('products__item')) {
     return;
   }
-  currentItemList = event.target.parentElement;
+  currentListItem = event.target.parentElement;
   //   console.dir(item);
-  currentProductid = currentItemList.dataset.id.trim();
+  currentProductid = currentListItem.dataset.id.trim();
   //   console.log(id);
   getNextProductById(currentProductid);
 
@@ -126,17 +126,17 @@ export function addToCartBtnOnClick(event) {
     cartArray.push(currentProductid);
     refs.addToCartBtn.textContent = 'Remove from cart';
 
-    if (!window.location.pathname.includes('index')) {
-      if (![...refs.prodList.children].includes(currentItemList)) {
-        refs.prodList.append(currentItemList);
+    if (window.location.pathname.includes('cart')) {
+      if (![...refs.prodList.children].includes(currentListItem)) {
+        refs.prodList.append(currentListItem);
       }
     }
   } else {
     cartArray = cartArray.filter(item => item !== currentProductid);
     refs.addToCartBtn.textContent = 'Add to cart';
 
-    if (!window.location.pathname.includes('index')) {
-      currentItemList.remove();
+    if (window.location.pathname.includes('cart')) {
+      currentListItem.remove();
     }
   }
 
@@ -151,17 +151,19 @@ export function addToWishListBtnOnClick(event) {
     wlArray.push(currentProductid);
     refs.addToWishListBtn.textContent = 'Remove from wishlist';
 
-    if (!window.location.pathname.includes('index')) {
-      if (![...refs.prodList.children].includes(currentItemList)) {
-        refs.prodList.append(currentItemList);
+    // console.log(window.location.pathname);
+
+    if (window.location.pathname.includes('wishlist')) {
+      if (![...refs.prodList.children].includes(currentListItem)) {
+        refs.prodList.append(currentListItem);
       }
     }
   } else {
     wlArray = wlArray.filter(item => item !== currentProductid);
     refs.addToWishListBtn.textContent = 'Add to wishlist';
 
-    if (!window.location.pathname.includes('index')) {
-      currentItemList.remove();
+    if (window.location.pathname.includes('wishlist')) {
+      currentListItem.remove();
     }
   }
   refs.spanNavWishList.textContent = wlArray.length;
