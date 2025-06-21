@@ -7,8 +7,8 @@ export function renderCategories(arrCat) {
   refs.catList.innerHTML = arrCat
     .map(
       cat => `<li class="categories__item">
-              <button class="categories__btn" type="button">${cat}</button>
-            </li>`
+                 <button class="categories__btn" type="button">${cat}</button>
+              </li>`
     )
     .join('');
 }
@@ -50,14 +50,14 @@ export function renderProduct({
   images: [img = '/'],
 }) {
   const markUp = `<img class="modal-product__img" src="${img}" alt="${description}" />
-                <div class="modal-product__content">
-                    <p class="modal-product__title">${title}</p>
-                    <ul class="modal-product__tags">${tags.join()}</ul>
-                    <p class="modal-product__description">${description}</p>
-                    <p class="modal-product__shipping-information">Shipping:${shippingInformation}</p>
-                    <p class="modal-product__return-policy">Return Policy:${returnPolicy}</p>
-                    <p class="modal-product__price">Price: ${price}$</p>
-                    <button class="modal-product__buy-btn" type="button">Buy</button>
-                </div>`;
+                  <div class="modal-product__content">
+                      <p class="modal-product__title">${title}</p>
+                      <ul class="modal-product__tags">${tags.join()}</ul>
+                      <p class="modal-product__description">${description}</p>
+                      <p class="modal-product__shipping-information">Shipping:${shippingInformation}</p>
+                      <p class="modal-product__return-policy">Return Policy:${returnPolicy}</p>
+                      <p class="modal-product__price">Price: ${price}$</p>
+                      <button class="modal-product__buy-btn" type="button">Buy</button>
+                  </div>`;
   refs.modalProduct.innerHTML = markUp;
 }

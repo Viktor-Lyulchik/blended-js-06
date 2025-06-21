@@ -55,3 +55,5 @@ refs.goToTopOfListBtn.addEventListener('click', () => {
 });
 
 refs.changeThemeBtn.addEventListener('click', changeThemeBtnOnClick);
+
+// https://www.npmjs.com/package/tui-pagination - lib 4 pagination

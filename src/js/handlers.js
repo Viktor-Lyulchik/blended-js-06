@@ -15,8 +15,8 @@ import {
   resetNumeration,
   getNextProductsByQuery,
   clearProductList,
-  showNotFound,
 } from './products-api';
+
 import { refs } from './refs';
 
 import { STORAGE_KEYS } from './constants';
@@ -66,15 +66,11 @@ export function loadMoreBtnOnClick(event) {
 }
 
 export function prodListOnClick(event) {
-  //   console.dir(event.target);
-
   if (!event.target.parentElement.classList.contains('products__item')) {
     return;
   }
   currentListItem = event.target.parentElement;
-  //   console.dir(item);
   currentProductid = currentListItem.dataset.id.trim();
-  //   console.log(id);
   getNextProductById(currentProductid);
 
   const cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
@@ -94,7 +90,6 @@ export function searchFormOnSubmit(event) {
   event.preventDefault();
 
   const query = event.currentTarget.elements.searchValue.value.trim();
-  //   console.log(query);
 
   clearProductList();
   showLoader();
