@@ -98,7 +98,7 @@
   background: #ff6b0a;
   cursor: pointer;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
   transition: all 0.3s ease;
 
   &:hover {
@@ -128,7 +128,7 @@
   background: #ff6b0a;
   cursor: pointer;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
   transition: all 0.3s ease;
 
   &:hover {
