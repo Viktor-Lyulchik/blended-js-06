@@ -1,5 +1,6 @@
 'use strict';
 import { refs } from './refs';
+import { increaseQuantity, decreaseQuantity } from './handlers';
 
 //Описана робота модалки - відкриття закриття і все що з модалкою повʼязано
 

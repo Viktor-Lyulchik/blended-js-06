@@ -25,4 +25,7 @@ export const refs = {
   goToTopOfListBtn: document.querySelector('button.go-to-top-of-list'),
   changeThemeBtn: document.querySelector('button.theme-toggle-button'),
   body: document.querySelector('body'),
+  decreaseBtn: document.querySelector('button.decrease-btn'),
+  increaseBtn: document.querySelector('button.increase-btn'),
+  productQuantity: document.querySelector('input.product-quantity'),
 };

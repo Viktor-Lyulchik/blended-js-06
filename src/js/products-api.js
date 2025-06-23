@@ -12,6 +12,7 @@ import { showErrorMsg, showInfoMsg } from './helpers';
 import { refs } from './refs';
 import { getDataFromLS, setDataToLS } from './storage';
 import { STORAGE_KEYS } from './constants';
+// import { increaseQuantity, decreaseQuantity } from './handlers';
 
 axios.defaults.baseURL = 'https://dummyjson.com/products/';
 
@@ -70,7 +71,7 @@ export function loadWishList() {
 export function loadCartList() {
   const cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
 
-  const promises = cartArray.map(id => {
+  const promises = cartArray.map(({ id }) => {
     return axios.get(id.trim());
   });
 
@@ -82,13 +83,18 @@ export function loadCartList() {
       }
     });
     renderProducts(products, true);
-    refs.spanCartDataCount.textContent = products.length;
-    refs.spanCartDataPrice.textContent = products
-      .reduce((sum, item) => sum + item.price, 0)
-      .toFixed(2);
+    updateCartData(cartArray);
   });
 }
 
+export function updateCartData(cartArray) {
+  refs.spanCartDataCount.textContent = cartArray
+    .reduce((sum, { quantity }) => sum + quantity, 0)
+    .toFixed(2);
+  refs.spanCartDataPrice.textContent = cartArray
+    .reduce((sum, { price, quantity }) => sum + quantity * price, 0)
+    .toFixed(2);
+}
 ///////////////////////////////////
 
 export function resetNumeration() {

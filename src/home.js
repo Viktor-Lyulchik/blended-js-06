@@ -15,6 +15,8 @@ import {
   updateStatusesOfLists,
   changeThemeBtnOnClick,
   loadSavedTheme,
+  increaseQuantity,
+  decreaseQuantity,
 } from './js/handlers';
 
 import { toggleModal } from './js/modal';
@@ -55,5 +57,9 @@ refs.goToTopOfListBtn.addEventListener('click', () => {
 });
 
 refs.changeThemeBtn.addEventListener('click', changeThemeBtnOnClick);
+
+refs.increaseBtn.addEventListener('click', () => increaseQuantity());
+
+refs.decreaseBtn.addEventListener('click', () => decreaseQuantity());
 
 // https://www.npmjs.com/package/tui-pagination - lib 4 pagination

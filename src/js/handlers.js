@@ -15,6 +15,7 @@ import {
   resetNumeration,
   getNextProductsByQuery,
   clearProductList,
+  updateCartData,
 } from './products-api';
 
 import { refs } from './refs';
@@ -24,6 +25,7 @@ import { STORAGE_KEYS } from './constants';
 let selectedCategory;
 let query;
 export let currentProductid;
+export let currentProductPrice;
 let currentListItem;
 
 export function catListOnClick(event) {
@@ -71,17 +73,27 @@ export function prodListOnClick(event) {
   }
   currentListItem = event.target.parentElement;
   currentProductid = currentListItem.dataset.id.trim();
+  currentProductPrice = +currentListItem.dataset.price.trim();
   getNextProductById(currentProductid);
 
   const cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
   const wlArray = getDataFromLS(STORAGE_KEYS.wishlist, []);
 
-  refs.addToCartBtn.textContent = cartArray.includes(currentProductid)
+  refs.addToCartBtn.textContent = cartArray.some(
+    ({ id }) => id === currentProductid
+  )
     ? 'Remove from '
     : 'Add to ' + 'cart';
-  refs.addToWishListBtn.textContent = wlArray.includes(currentProductid)
+  refs.addToWishListBtn.textContent = wlArray.some(
+    ({ id }) => id === currentProductid
+  )
     ? 'Remove from '
     : 'Add to ' + 'wishlist';
+
+  const cartProduct = cartArray.find(({ id }) => id === currentProductid);
+  if (cartProduct) {
+    refs.productQuantity.value = cartProduct.quantity;
+  }
 
   toggleModal();
 }
@@ -114,11 +126,52 @@ export function clearSearchBtnOnClick(event) {
   getProductsList();
 }
 
+function newProductObj(id, quantity = 1, price = 0) {
+  return { id, quantity, price };
+}
+
+function writeNewQuantityToCartArray(newQuantity) {
+  let cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
+  const cartProduct = cartArray.find(({ id }) => id === currentProductid);
+  if (!cartProduct) {
+    cartArray.push(newProductObj(currentProductid, 1, currentProductPrice));
+  } else {
+    cartProduct.quantity = parseInt(newQuantity);
+  }
+  setDataToLS(STORAGE_KEYS.cart, cartArray);
+
+  return cartArray;
+}
+
+export function increaseQuantity() {
+  const newQuantity = parseInt(refs.productQuantity.value) + 1;
+  refs.productQuantity.value = newQuantity;
+
+  const cartArray = writeNewQuantityToCartArray(newQuantity);
+  updateStatusesOfLists();
+  if (window.location.pathname.includes('cart')) {
+    updateCartData(cartArray);
+  }
+}
+
+export function decreaseQuantity() {
+  if (parseInt(refs.productQuantity.value) > 1) {
+    const newQuantity = parseInt(refs.productQuantity.value) - 1;
+    refs.productQuantity.value = newQuantity;
+    const cartArray = writeNewQuantityToCartArray(newQuantity);
+    updateStatusesOfLists();
+    if (window.location.pathname.includes('cart')) {
+      updateCartData(cartArray);
+    }
+  }
+}
+
 export function addToCartBtnOnClick(event) {
   let cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
 
-  if (!cartArray.includes(currentProductid)) {
-    cartArray.push(currentProductid);
+  const cartProduct = cartArray.find(({ id }) => id === currentProductid);
+  if (!cartProduct) {
+    cartArray.push(newProductObj(currentProductid, 1, currentProductPrice));
     refs.addToCartBtn.textContent = 'Remove from cart';
 
     if (window.location.pathname.includes('cart')) {
@@ -127,7 +180,7 @@ export function addToCartBtnOnClick(event) {
       }
     }
   } else {
-    cartArray = cartArray.filter(item => item !== currentProductid);
+    cartArray = cartArray.filter(({ id }) => id !== currentProductid);
     refs.addToCartBtn.textContent = 'Add to cart';
 
     if (window.location.pathname.includes('cart')) {
@@ -167,7 +220,10 @@ export function addToWishListBtnOnClick(event) {
 
 export function updateStatusesOfLists() {
   const cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
-  refs.spanNavCart.textContent = cartArray.length;
+  refs.spanNavCart.textContent = cartArray.reduce(
+    (sum, { quantity }) => sum + quantity,
+    0
+  );
   const wlArray = getDataFromLS(STORAGE_KEYS.wishlist, []);
   refs.spanNavWishList.textContent = wlArray.length;
 }
@@ -183,10 +239,7 @@ export function cartBuyBtnOnClick(event) {
 }
 
 export function changeThemeBtnOnClick() {
-  // console.log(refs.body);
-
   toggleTheme();
-  // console.log(refs.body.classList);
 }
 
 export function toggleTheme() {

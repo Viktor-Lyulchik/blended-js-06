@@ -11,6 +11,8 @@ import {
   cartBuyBtnOnClick,
   changeThemeBtnOnClick,
   loadSavedTheme,
+  increaseQuantity,
+  decreaseQuantity,
 } from './js/handlers';
 import { toggleModal } from './js/modal';
 
@@ -29,3 +31,7 @@ refs.addToWishListBtn.addEventListener('click', addToWishListBtnOnClick);
 refs.cartBuyBtn.addEventListener('click', cartBuyBtnOnClick);
 
 refs.changeThemeBtn.addEventListener('click', changeThemeBtnOnClick);
+
+refs.increaseBtn.addEventListener('click', () => increaseQuantity());
+
+refs.decreaseBtn.addEventListener('click', () => decreaseQuantity());
