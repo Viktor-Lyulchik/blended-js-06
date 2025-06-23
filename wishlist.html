@@ -7,9 +7,9 @@
     <title>Wishlist</title>
     <script type="module" crossorigin src="/blended-js-06/wishlist.js"></script>
     <link rel="modulepreload" crossorigin href="/blended-js-06/assets/vendor-Cbhu4xvy.js">
-    <link rel="modulepreload" crossorigin href="/blended-js-06/assets/handlers-TAC48Yni.js">
+    <link rel="modulepreload" crossorigin href="/blended-js-06/assets/handlers-BHYZDMq4.js">
     <link rel="stylesheet" crossorigin href="/blended-js-06/assets/vendor-DnveWo0P.css">
-    <link rel="stylesheet" crossorigin href="/blended-js-06/assets/handlers-B0lGnRp3.css">
+    <link rel="stylesheet" crossorigin href="/blended-js-06/assets/handlers-NZ0PGSKu.css">
   </head>
   <body class="theme-light">
     <header class="header">
@@ -100,6 +100,17 @@
   <div class="modal__content">
     <button class="modal__close-btn" type="button" data-modal-close></button>
     <div class="modal-product"></div>
+    <div class="product-counter">
+      <button class="decrease-btn">-</button>
+      <input
+        type="number"
+        class="product-quantity"
+        value="0"
+        min="0"
+        readonly
+      />
+      <button class="increase-btn">+</button>
+    </div>
     <div class="modal-product__actions">
       <button
         class="modal-product__btn modal-product__btn--wishlist"
