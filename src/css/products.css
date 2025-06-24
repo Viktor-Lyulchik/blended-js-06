@@ -167,17 +167,11 @@
 
   border-radius: 8px;
 
-  /*  */
-  /* padding: 1rem; */
-
   color: white;
-  /* font-weight: 600; */
-  /* letter-spacing: 0.5px; */
 
   background: #ff6b0a;
   cursor: pointer;
   border: none;
-  /* border-radius: 25px; */
   transition: all 0.3s ease;
 
   &:hover {
@@ -188,7 +182,8 @@
 }
 
 .product-counter input {
-  width: 40px;
+  padding-bottom: 5px;
+  width: 50px;
   height: 30px;
   text-align: center;
   font-size: 1.2rem;
@@ -196,4 +191,11 @@
   color: #ff6b0a;
   border-color: #ff6b0a;
   border-radius: 8px;
+  border-width: 3px;
+}
+
+.product-counter input::-webkit-outer-spin-button,
+.product-counter input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

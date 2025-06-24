@@ -79,23 +79,33 @@ export function prodListOnClick(event) {
   const cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
   const wlArray = getDataFromLS(STORAGE_KEYS.wishlist, []);
 
+  updateTextAddToCartBtn(cartArray);
+  updateTextaddToWishListBtn(wlArray);
+
+  const cartProduct = cartArray.find(({ id }) => id === currentProductid);
+  if (cartProduct) {
+    refs.productQuantity.value = cartProduct.quantity;
+  } else {
+    refs.productQuantity.value = 0;
+  }
+
+  toggleModal();
+}
+
+function updateTextAddToCartBtn(cartArray) {
   refs.addToCartBtn.textContent = cartArray.some(
     ({ id }) => id === currentProductid
   )
     ? 'Remove from '
     : 'Add to ' + 'cart';
+}
+
+function updateTextaddToWishListBtn(wlArray) {
   refs.addToWishListBtn.textContent = wlArray.some(
-    ({ id }) => id === currentProductid
+    id => id === currentProductid
   )
     ? 'Remove from '
     : 'Add to ' + 'wishlist';
-
-  const cartProduct = cartArray.find(({ id }) => id === currentProductid);
-  if (cartProduct) {
-    refs.productQuantity.value = cartProduct.quantity;
-  }
-
-  toggleModal();
 }
 
 export function searchFormOnSubmit(event) {
@@ -149,6 +159,7 @@ export function increaseQuantity() {
 
   const cartArray = writeNewQuantityToCartArray(newQuantity);
   updateStatusesOfLists();
+  updateTextAddToCartBtn(cartArray);
   if (window.location.pathname.includes('cart')) {
     updateCartData(cartArray);
   }
@@ -160,6 +171,7 @@ export function decreaseQuantity() {
     refs.productQuantity.value = newQuantity;
     const cartArray = writeNewQuantityToCartArray(newQuantity);
     updateStatusesOfLists();
+    updateTextAddToCartBtn(cartArray);
     if (window.location.pathname.includes('cart')) {
       updateCartData(cartArray);
     }
@@ -168,11 +180,13 @@ export function decreaseQuantity() {
 
 export function addToCartBtnOnClick(event) {
   let cartArray = getDataFromLS(STORAGE_KEYS.cart, []);
+  let newQuantity = 0;
 
   const cartProduct = cartArray.find(({ id }) => id === currentProductid);
   if (!cartProduct) {
     cartArray.push(newProductObj(currentProductid, 1, currentProductPrice));
     refs.addToCartBtn.textContent = 'Remove from cart';
+    newQuantity = 1;
 
     if (window.location.pathname.includes('cart')) {
       if (![...refs.prodList.children].includes(currentListItem)) {
@@ -188,7 +202,16 @@ export function addToCartBtnOnClick(event) {
     }
   }
 
-  refs.spanNavCart.textContent = cartArray.length;
+  if (window.location.pathname.includes('cart')) {
+    updateCartData(cartArray);
+  }
+
+  refs.productQuantity.value = newQuantity;
+
+  refs.spanNavCart.textContent = cartArray.reduce(
+    (sum, { quantity }) => sum + quantity,
+    0
+  );
   setDataToLS(STORAGE_KEYS.cart, cartArray);
 }
 
@@ -207,7 +230,7 @@ export function addToWishListBtnOnClick(event) {
       }
     }
   } else {
-    wlArray = wlArray.filter(item => item !== currentProductid);
+    wlArray = wlArray.filter(id => id !== currentProductid);
     refs.addToWishListBtn.textContent = 'Add to wishlist';
 
     if (window.location.pathname.includes('wishlist')) {
